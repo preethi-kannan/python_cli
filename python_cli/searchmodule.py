@@ -12,7 +12,11 @@ def getSong(search):
 	request = requests.get(api_call)
 	data = request.json()
 	data = data['message']['body']
-	print(data['track_list'][0]['track']['track_name'])
+	
+	if data['track_list']:
+		data = data['track_list'][0]['track']['track_name']
+	else:
+		print("Sorry I couldn't find any songs with those lyrics")
 
 	return data
 

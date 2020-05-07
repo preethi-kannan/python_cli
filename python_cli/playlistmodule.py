@@ -25,7 +25,6 @@ def getPlaylist(playlist_name, song_name, username):
 					
 					playlistfound = True
 					playlist_id = playlist['id']
-				print(playlist['name'])
 					
 	else:
 		print("can't get token for", username)
