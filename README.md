@@ -7,6 +7,7 @@ The basic commands are:
 spotify_cli <"Track Name">
 spotify_cli <"Track Lyrics">
 ```
+Screen Shot 2020-05-10 at 4.33.28 PM
 ## API Reference
 
 * In order to interact with the Spotify API you must create and
