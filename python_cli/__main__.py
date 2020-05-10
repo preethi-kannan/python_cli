@@ -11,6 +11,7 @@ def main():
 
     arg = sys.argv[1]
 
+    #Get the argument and what type of arg it is
     original_search = arg
     print("Is this\n1. Lyrics\n2. Song Title")
     input_type = input(">")
@@ -26,6 +27,10 @@ def main():
         print()
 
 
+    #Go through playlist addition logic
+    #If playlist already exists add to playlist
+    #If playlist doesn't exist  create new playlist and add
+    
     g = input("Add to playlist? (Y/N) ")
     if (g != "Y"):
     	return

@@ -2,6 +2,8 @@ import requests, json, spotipy
 import spotipy.util as util
 from spotipy.oauth2 import SpotifyClientCredentials
 
+
+# Gets track id and track info based on track name using Spotify APIs
 def getTrack(song_name):
 	
 

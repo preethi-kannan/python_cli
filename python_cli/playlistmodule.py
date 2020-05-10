@@ -2,6 +2,10 @@ import sys
 import spotipy
 import spotipy.util as util
 
+
+# Finds all playlists owned by user and then determines 
+# if the playlist input is an existing playlist
+
 def getPlaylist(playlist_name, song_name, username):
 
 	scope = 'playlist-read-private'
@@ -38,6 +42,9 @@ def getPlaylist(playlist_name, song_name, username):
 	return playlist_id, playlistfound
 
 
+# Adds found song into desired playlist if not already
+# found in playlist
+
 def addToPlaylist(playlist_id, track_id, username):
 
 	scope = 'playlist-modify-public'
@@ -58,6 +65,8 @@ def addToPlaylist(playlist_id, track_id, username):
 		
 	else: 
 		print("can't get token")
+
+# Checks if song is already in playlist
 
 def checkIfSongExistsinPlaylist(playlist_id, track_id, username):
 
@@ -80,7 +89,9 @@ def checkIfSongExistsinPlaylist(playlist_id, track_id, username):
 				return True
 
 	return False
-	
+
+
+#Creates new playlist if playlist does not exist
 
 def createNewPlaylist(playlist_name, username):
 

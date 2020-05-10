@@ -1,6 +1,7 @@
 import requests
 import json
 
+# Searches and returns top track name based on lyrics using Musixmatch API
 
 def getSong(search):
 
