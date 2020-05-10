@@ -9,7 +9,7 @@ def getPlaylist(playlist_name, song_name, username):
 		scope,
 		"c191fdd1e95f4383aafa976bf4ec761a",
 		"3d39f727fb764ea79a715bdff69e0d54",
-		"https://localhost:8080")
+		"http://127.0.0.1:9090")
 
 	playlistfound = False
 	playlist_id = ""
@@ -17,10 +17,9 @@ def getPlaylist(playlist_name, song_name, username):
 	if token:
 		sp = spotipy.Spotify(auth=token)
 		playlists = sp.user_playlists(username)
-
 		for playlist in playlists['items']:
 			if playlist['owner']['id'] == username:
-
+				
 				if playlist['name'] == playlist_name: 
 					
 					playlistfound = True
@@ -44,15 +43,35 @@ def addToPlaylist(playlist_id, track_id, username):
 		scope, 
 		"c191fdd1e95f4383aafa976bf4ec761a",
 		"3d39f727fb764ea79a715bdff69e0d54",
-		"https://localhost:8080")
+		"http://127.0.0.1:9090")
 
 	if token:
 		sp = spotipy.Spotify(auth = token)
 		sp.trace = False
+		checkIfSongExistsinPlaylist(playlist_id, track_id, username)
 		results  = sp.user_playlist_add_tracks(username, playlist_id, [track_id])
 		
 	else: 
 		print("can't get token")
+
+def checkIfSongExistsinPlaylist(playlist_id, track_id, username):
+
+	scope = scope = 'playlist-read-private'
+	token = util.prompt_for_user_token(username,
+		scope,
+		"c191fdd1e95f4383aafa976bf4ec761a",
+		"3d39f727fb764ea79a715bdff69e0d54",
+		"http://127.0.0.1:9090")
+
+	if token:
+		sp = spotipy.Spotify(auth = token)
+		sp.trace = False
+		results = sp.user_playlist_tracks(username, playlist_id)
+		tracks = results['items']
+		for track in tracks['items']:
+			if track['id'] == track_id:
+				print("That already exists in this playlist!")
+				print()
 
 
 def createNewPlaylist(playlist_name, username):
@@ -62,7 +81,7 @@ def createNewPlaylist(playlist_name, username):
 		scope, 
 		"c191fdd1e95f4383aafa976bf4ec761a",
 		"3d39f727fb764ea79a715bdff69e0d54",
-		"https://localhost:8080")
+		"http://127.0.0.1:9090")
 
 	new_id = ""
 

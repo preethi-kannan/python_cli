@@ -12,6 +12,7 @@ def getTrack(song_name):
 	sp = spotipy.Spotify(client_credentials_manager
 	= client_credentials_manager)
 
+
 	track_results = sp.search(q=song_name, type='track', limit=1, offset=0)
 	for i, t in enumerate(track_results['tracks']['items']):
 		artist = t['artists'][0]['name']
@@ -27,4 +28,4 @@ def getTrack(song_name):
 	
 	return track_id
 
-
+	

@@ -14,14 +14,15 @@ def main():
     original_search = arg
     print("Is this\n1. Lyrics\n2. Song Title")
     input_type = input(">")
+    print()
 
 
     if (input_type == "1"):
         lyric_search = getSong(arg)
-        print(lyric_search)
         track_id = getTrack(lyric_search)
     else:
         track_id = getTrack(original_search)
+        print()
 
 
     g = input("Add to playlist? (Y/N) ")
