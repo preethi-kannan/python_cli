@@ -20,6 +20,7 @@ def main():
     if (input_type == "1"):
         lyric_search = getSong(arg)
         track_id = getTrack(lyric_search)
+        print()
     else:
         track_id = getTrack(original_search)
         print()
@@ -31,13 +32,12 @@ def main():
 
     playlist_name = input("Which playlist? ")
     username = input("Username: ")
+    print()
 
     playlist_id = getPlaylist(playlist_name, "sdfjfnsdkf", username)
 
     if playlist_id[1] == True:
         addToPlaylist(playlist_id[0], track_id, username)
-        print()
-        print("Bust down thotiana!")
     else:
         print()
         print("Creating new playlist...")

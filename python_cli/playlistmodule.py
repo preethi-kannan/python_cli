@@ -30,8 +30,10 @@ def getPlaylist(playlist_name, song_name, username):
 
 	if playlistfound:
 		print("The playlist was found")
+		print()
 	else:
 		print("Uh oh couldn't find that playlist")
+		print()
 
 	return playlist_id, playlistfound
 
@@ -48,17 +50,20 @@ def addToPlaylist(playlist_id, track_id, username):
 	if token:
 		sp = spotipy.Spotify(auth = token)
 		sp.trace = False
-		checkIfSongExistsinPlaylist(playlist_id, track_id, username)
-		results  = sp.user_playlist_add_tracks(username, playlist_id, [track_id])
+		duplicateExists = checkIfSongExistsinPlaylist(playlist_id, track_id, username)
+		if (not duplicateExists):
+			results  = sp.user_playlist_add_tracks(username, playlist_id, [track_id])
+			print()
+			print("Bust down Thotiana!")
 		
 	else: 
 		print("can't get token")
 
 def checkIfSongExistsinPlaylist(playlist_id, track_id, username):
 
-	scope = scope = 'playlist-read-private'
+	scope = 'playlist-modify-public'
 	token = util.prompt_for_user_token(username,
-		scope,
+		scope, 
 		"c191fdd1e95f4383aafa976bf4ec761a",
 		"3d39f727fb764ea79a715bdff69e0d54",
 		"http://127.0.0.1:9090")
@@ -68,11 +73,14 @@ def checkIfSongExistsinPlaylist(playlist_id, track_id, username):
 		sp.trace = False
 		results = sp.user_playlist_tracks(username, playlist_id)
 		tracks = results['items']
-		for track in tracks['items']:
-			if track['id'] == track_id:
-				print("That already exists in this playlist!")
+		for track in tracks: 
+			if track['track']['id'] == track_id:
+				print("That track already exists in this playlist!")
 				print()
+				return True
 
+	return False
+	
 
 def createNewPlaylist(playlist_name, username):
 
